@@ -1,0 +1,94 @@
+Enter file contents here#include <stdio.h>
+#include <string.h>
+// return length;  
+int Decode(const char *src, const char *table, char *dest) {
+	  char *d = dest;
+	  const char *p = src;
+	  while (*p != 0) {
+		    if (*p == '_') {
+			      if (strncmp(p, "_z2C$q", 6) == 0) {
+				        *dest++ = ':';
+				        p += 6;
+				
+			}
+			else if (strncmp(p, "_z&e3B", 6) == 0) {
+				        *dest++ = '.';
+				        p += 6;
+				
+			}
+			else {
+				        *dest++ = *p++;
+				
+			}
+			
+		}
+		else if (*p == 'A') {
+			      if (strncmp(p, "AzdH3F", 6) == 0) {
+				        *dest++ = '/';
+				        p += 6;
+				
+			}
+			else {
+				        *dest++ = *p++;
+				
+			}
+			
+		}
+		else if (table[*p] == 0) {
+			      *dest++ = *p++;
+			
+		}
+		else {
+			      *dest++ = table[*p++];
+			
+		}
+		
+	}
+	  *dest = 0;
+	  return dest - d;
+	
+}
+
+int main(int argc, char **argv) {
+	  static char table[128] = { 0 };
+	  table['w'] = 'a';
+	  table['k'] = 'b';
+	  table['v'] = 'c';
+	  table['1'] = 'd';
+	  table['j'] = 'e';
+	  table['u'] = 'f';
+	  table['2'] = 'g';
+	  table['i'] = 'h';
+	  table['t'] = 'i';
+	  table['3'] = 'j';
+	  table['h'] = 'k';
+	  table['s'] = 'l';
+	  table['4'] = 'm';
+	  table['g'] = 'n';
+	  table['5'] = 'o';
+	  table['r'] = 'p';
+	  table['q'] = 'q';
+	  table['6'] = 'r';
+	  table['f'] = 's';
+	  table['p'] = 't';
+	  table['7'] = 'u';
+	  table['e'] = 'v';
+	  table['o'] = 'w';
+	  table['8'] = '1';
+	  table['d'] = '2';
+	  table['n'] = '3';
+	  table['9'] = '4';
+	  table['c'] = '5';
+	  table['m'] = '6';
+	  table['0'] = '7';
+	  table['b'] = '8';
+	  table['l'] = '9';
+	  table['a'] = '0';
+	
+		  char *url = "ippr_z2C$qAzdH3FAzdH3Ft428_z&e3Bd0_z&e3BvgAzdH3Ft4w2jfAzdH3Fda8a8aAzdH3FddAzdH3F8db00d0dnd_9amln8aa_z&e3B3r2";
+	  char dest[1024];
+	  Decode(url, table, dest);
+	  printf("%s\n", dest);
+	  return 0;
+	
+}
